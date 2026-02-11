@@ -1,7 +1,3 @@
-ঠিক আছে Junaid 😎
-আমি তোমার README.md **Setup Instructions** অংশকে update করে দিয়ে দিচ্ছি, যেখানে **user registration এবং login example** সহ step-by-step দেখানো আছে। এটা GitHub-ready এবং reviewer-friendly।
-
----
 
 ````markdown
 ## ⚙️ Setup Instructions
