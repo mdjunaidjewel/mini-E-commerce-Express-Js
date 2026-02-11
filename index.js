@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -90,6 +91,10 @@ const adminOnly = (req,res,next)=>{
 /* ======================
    AUTH ROUTES
 ====================== */
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Mini E-Commerce API is running" });
+});
 
 // Register
 app.post("/api/register", async (req,res)=>{
@@ -287,4 +292,4 @@ app.post("/api/orders/:id/cancel",protect, async(req,res)=>{
 /* ======================
    SERVER START
 ====================== */
-app.listen(process.env.PORT,()=>console.log(`Server running on port ${process.env.PORT}`));
+app.listen(process.env.PORT,()=>console.log(`Server running on port ${PORT}`));
