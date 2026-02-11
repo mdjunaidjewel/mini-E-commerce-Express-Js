@@ -92,12 +92,12 @@ const adminOnly = (req,res,next)=>{
    AUTH ROUTES
 ====================== */
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "Mini E-Commerce API is running" });
 });
 
 // Register
-app.post("/api/register", async (req,res)=>{
+app.post("/register", async (req,res)=>{
   try{
     const {name,email,password} = req.body;
     if(!name || !email || !password) return res.status(400).json({message:"All fields required"});
@@ -115,7 +115,7 @@ app.post("/api/register", async (req,res)=>{
 });
 
 // Login
-app.post("/api/login", async(req,res)=>{
+app.post("/login", async(req,res)=>{
   try{
     const {email,password} = req.body;
     if(!email || !password) return res.status(400).json({message:"Email & password required"});
@@ -136,7 +136,7 @@ app.post("/api/login", async(req,res)=>{
 ====================== */
 
 // Create product
-app.post("/api/products",protect,adminOnly, async(req,res)=>{
+app.post("/products",protect,adminOnly, async(req,res)=>{
   try{
     const {name,price,stock} = req.body;
     if(!name || !price || !stock) return res.status(400).json({message:"Name, price & stock required"});
@@ -148,7 +148,7 @@ app.post("/api/products",protect,adminOnly, async(req,res)=>{
 });
 
 // Update product
-app.put("/api/products/:id",protect,adminOnly, async(req,res)=>{
+app.put("/products/:id",protect,adminOnly, async(req,res)=>{
   try{
     const product = await Product.findByIdAndUpdate(req.params.id,req.body,{new:true});
     if(!product) return res.status(404).json({message:"Product not found"});
@@ -159,7 +159,7 @@ app.put("/api/products/:id",protect,adminOnly, async(req,res)=>{
 });
 
 // Delete product
-app.delete("/api/products/:id",protect,adminOnly, async(req,res)=>{
+app.delete("/products/:id",protect,adminOnly, async(req,res)=>{
   try{
     const product = await Product.findByIdAndDelete(req.params.id);
     if(!product) return res.status(404).json({message:"Product not found"});
@@ -170,7 +170,7 @@ app.delete("/api/products/:id",protect,adminOnly, async(req,res)=>{
 });
 
 // List products
-app.get("/api/products", async(req,res)=>{
+app.get("/products", async(req,res)=>{
   try{
     const products = await Product.find();
     res.json(products);
@@ -184,7 +184,7 @@ app.get("/api/products", async(req,res)=>{
 ====================== */
 
 // Add to cart
-app.post("/api/cart",protect, async(req,res)=>{
+app.post("/cart",protect, async(req,res)=>{
   try{
     const {productId,quantity} = req.body;
     if(!productId || !quantity) return res.status(400).json({message:"Product and quantity required"});
@@ -207,7 +207,7 @@ app.post("/api/cart",protect, async(req,res)=>{
 });
 
 // Remove from cart
-app.delete("/api/cart/:productId",protect, async(req,res)=>{
+app.delete("/cart/:productId",protect, async(req,res)=>{
   try{
     const cart = await Cart.findOne({user:req.user.id});
     if(!cart) return res.status(404).json({message:"Cart not found"});
@@ -224,7 +224,7 @@ app.delete("/api/cart/:productId",protect, async(req,res)=>{
 ====================== */
 
 // Place order from cart
-app.post("/api/orders/from-cart",protect, async(req,res)=>{
+app.post("/orders/from-cart",protect, async(req,res)=>{
   const session = await mongoose.startSession();
   session.startTransaction();
   try{
@@ -254,7 +254,7 @@ app.post("/api/orders/from-cart",protect, async(req,res)=>{
 });
 
 // Cancel order (fraud prevention)
-app.post("/api/orders/:id/cancel",protect, async(req,res)=>{
+app.post("/orders/:id/cancel",protect, async(req,res)=>{
   const session = await mongoose.startSession();
   session.startTransaction();
   try{
