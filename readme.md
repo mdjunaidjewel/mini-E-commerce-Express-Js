@@ -83,7 +83,7 @@ Server will run at: `http://localhost:5000`
 
 ### 1️⃣ Register User
 
-**Endpoint:** `POST /api/register`
+**Endpoint:** `POST /register`
 **Body:**
 
 ```json
@@ -106,7 +106,7 @@ Server will run at: `http://localhost:5000`
 
 ### 2️⃣ Login User
 
-**Endpoint:** `POST /api/login`
+**Endpoint:** `POST /login`
 **Body:**
 
 ```json
@@ -141,7 +141,7 @@ Content-Type: application/json
 
 ### 4️⃣ Add Product (Admin Only)
 
-**Endpoint:** `POST /api/products`
+**Endpoint:** `POST /products`
 **Body:**
 
 ```json
@@ -172,7 +172,7 @@ Content-Type: application/json
 
 ### 5️⃣ Add Product to Cart
 
-**Endpoint:** `POST /api/cart`
+**Endpoint:** `POST /cart`
 **Body:**
 
 ```json
@@ -204,7 +204,7 @@ Content-Type: application/json
 
 ### 6️⃣ Place Order from Cart
 
-**Endpoint:** `POST /api/orders/from-cart`
+**Endpoint:** `POST /orders/from-cart`
 
 **Response:**
 
@@ -233,7 +233,7 @@ Content-Type: application/json
 
 ### 7️⃣ Cancel Order
 
-**Endpoint:** `POST /api/orders/:id/cancel`
+**Endpoint:** `POST /orders/:id/cancel`
 
 **Response:**
 
